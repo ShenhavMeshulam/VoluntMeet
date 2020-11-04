@@ -1,0 +1,1 @@
+export {configureMongoose} from './Mongoose';
