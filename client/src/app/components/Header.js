@@ -2,12 +2,14 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import { color } from '@material-ui/system';
 
 const useStyles = makeStyles(() => ({
   appBar: {
     display: 'flax',
     width: '100%',
     height: '4rem',
+    backgroundColor: '#242526'
   },
   iconButton: {
     color: 'white',

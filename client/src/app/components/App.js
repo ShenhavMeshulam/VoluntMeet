@@ -5,15 +5,16 @@ import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 import Header from "./Header";
 import Menu from "./Menu";
-import HomePage from './HomePage';
-import Test from './Test';
+import HomePage from './Pages/HomePage';
+import Test from './Pages/Test';
 
 const useStyles = makeStyles(() => ({
   app: {
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    width: '100%'
+    width: '100%',
+    color: 'white',
   },
   contet: {
     display: 'flex',
