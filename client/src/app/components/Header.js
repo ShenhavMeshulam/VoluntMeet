@@ -5,7 +5,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles(() => ({
   appBar: {
-    display: 'flax',
+    display: 'flex',
     width: '100%',
     height: '4rem',
   },

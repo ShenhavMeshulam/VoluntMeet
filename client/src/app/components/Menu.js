@@ -44,9 +44,9 @@ export default ({ isOpen }) => {
   const MenuItems =
     [
       {
-        text: 'test',
+        text: 'Home',
         icon: <HomeIcon />,
-        route: '/test'
+        route: '/'
       }
     ]
 

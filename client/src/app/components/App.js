@@ -1,14 +1,14 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import Header from "./Header";
 import Menu from "./Menu";
 
-import HomePage from './Pages/HomePage';
-import Test from './Pages/Test';
 import { EventPage } from './Pages/EventPage';
+import { AddEvent } from './Pages/AddEvent/AddEvent';
 
 const useStyles = makeStyles(() => ({
   app: {
@@ -22,11 +22,15 @@ const useStyles = makeStyles(() => ({
     flexDirection: 'row',
     height: '100%'
   },
-  homePage: {
-    paddingLeft: '50px',
+  page: {
+    margin: '16px',
     width: '100%',
-    height: '100%'
-  }
+  },
+  addEvent: {
+    position: 'absolute',
+    bottom: '10px',
+    right: '10px'
+  },
 }));
 
 export default () => {
@@ -37,16 +41,27 @@ export default () => {
     setSidenavOpen(!sidenavOpen);
   }
 
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Router>
-
       <Box className={classes.app}>
         <Header OnSidenavButtonClick={handleSidenavClickButton} />
         <div className={classes.contet}>
           <Menu isOpen={sidenavOpen} />
-          <Route exact path="/" component={HomePage} />
-          <Route path="/test" component={Test} />
-          <Route path="/events" component={EventPage} />
+            <Switch>
+              <Route exact path="/" component={EventPage} />
+            </Switch>
+            <Button className={classes.addEvent} variant="contained" color="primary" onClick={handleClickOpen}>
+              Add Event
+            </Button>
+            <AddEvent open={open} handleClose={handleClose}/>
         </div>
       </Box>
     </Router>
