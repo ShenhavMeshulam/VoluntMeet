@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
+import Chip from '@material-ui/core/Chip';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
@@ -41,19 +42,16 @@ const useStyles = makeStyles((theme) => ({
         textTransform: 'uppercase',
         padding: theme.spacing(2.5),
         flexWrap: 'auto'
-        // fontFamily: 'cursive'
     },
     fieldContainer : {
           display: 'flex',
           padding: '10px',
           fontSize: 'Larger',
-        //   fontFamily: 'cursive'
       },
       propTitle: {
           paddingLeft: '5px',
           paddingRight: '5px',
           fontWeight: 'bold',
-        //   fontFamily: 'cursive'
       },
       dialogContent: {
         display: 'flex',
@@ -108,44 +106,23 @@ const useStyles = makeStyles((theme) => ({
       socialDetails: {
           fontWeight: '1000',
           fontSize: '20px'
+      },
+      tagsContainer: {
+          display: 'flex',
+          flexFlow: 'row',
+          alignItems: 'space-between',
+          '& > *': {
+            margin: theme.spacing(0.5),
+          },
       }
     }));
 
-const event = {
-    title: 'event',
-    description: 'yuval checkin ggbhjgyyyyyyyy yyyyy yyyyyyyyyyyyyy yyyyyyyyy yyyyyyyyyyyy yyyyyyy yyyyyyyyy yyyyyyy yyy yyyyy yy yyyyyyy',
-    date: new Date().toLocaleDateString("IL").split("/").toString(),
-    location: 'yehud',
-    Tags: ['launch', 'tryme'],
-    minimunPeople: 2,
-    maxPeople: 20000,
-    arrivingAmount: 15,
-    creator: {
-        name: 'Yuval Shlefer',
-        phoneNumber: '0546976974'
-    },
-    comments: ['great success', 'good job'],
-    likes: 15,
-    image: ''
-}
-
-export default function CustomizedDialogs() {
-  const [open, setOpen] = React.useState(false);
+export default function CustomizedDialogs({isOpen, handleClose, event}) {
   const classes = useStyles();
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open dialog
-      </Button>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} fullWidth={true} maxWidth={'lg'}>
+      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={isOpen} fullWidth={true} maxWidth={'lg'}>
           <div className={classes.titleContainer}>
         <MuiDialogTitle className={classes.title} id="customized-dialog-title" onClose={handleClose}>
           {event.title}
@@ -156,6 +133,18 @@ export default function CustomizedDialogs() {
         </div>
         <MuiDialogContent className={classes.dialogContent} dividers>
             <div className={classes.eventDetails}>
+            <div className={classes.tagsContainer}>
+            { event.tags.map(tag => {
+                return (
+            <Chip
+                size="small"
+                label={tag}
+                avatar={<LocalOfferIcon />}
+            />
+            )
+            })
+            }
+            </div>
           <Typography gutterBottom className={classes.fieldContainer}>
               <DescriptionIcon />
               <div className={classes.propTitle}>Description: </div>
@@ -186,11 +175,6 @@ export default function CustomizedDialogs() {
               <div className={classes.propTitle}>Arriving Amount:</div>
            {event.arrivingAmount}
           </Typography>
-          <Typography gutterBottom className={classes.fieldContainer}>
-              <LocalOfferIcon />
-              <div className={classes.propTitle}>Tags: </div>
-           {event.Tags.map(tag => tag + ', ')}
-          </Typography>
           </div>
           <div className={classes.otherDetailsContainer}>
             <Typography gutterBottom className={classes.fieldContainer}>
@@ -216,7 +200,7 @@ export default function CustomizedDialogs() {
             </div>
             </div>
             <div className={classes.optionsContainer}>
-          <Button autoFocus className={classes.signUpButton} onClick={handleClose} color="primary">
+          <Button autoFocus className={classes.signUpButton} onClick={} color="primary">
             Sign Me Up!
           </Button>
           </div>
@@ -225,4 +209,3 @@ export default function CustomizedDialogs() {
     </div>
   );
 }
-
