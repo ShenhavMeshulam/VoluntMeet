@@ -8,7 +8,7 @@ import Menu from "./Menu";
 
 import HomePage from './Pages/HomePage';
 import Test from './Pages/Test';
-import { VolunteersPage } from './Pages/VolunteersPage';
+import { EventPage } from './Pages/EventPage';
 
 const useStyles = makeStyles(() => ({
   app: {
@@ -46,7 +46,7 @@ export default () => {
           <Menu isOpen={sidenavOpen} />
           <Route exact path="/" component={HomePage} />
           <Route path="/test" component={Test} />
-          <Route path="/volunteers" component={VolunteersPage} />
+          <Route path="/events" component={EventPage} />
         </div>
       </Box>
     </Router>
