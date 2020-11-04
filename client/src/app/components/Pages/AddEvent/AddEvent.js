@@ -13,8 +13,15 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 const useStyles = makeStyles(() => ({
+  headline: {
+    fontWeight: 'bold',
+    borderBottom: '1px solid',
+  },
   description: {
     width: '90%'
+  },
+  inputWidth: {
+    width: '67%'
   }
 }));
 
@@ -29,14 +36,14 @@ export const AddEvent = ({open, handleClose}) => {
   return (
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
-          <Typography variant="h4" component="h2">
+          <Typography variant="h4" component="h3" className={classes.headline}>
             Add Volunteering Event
           </Typography>
         </DialogTitle>
         <DialogContent>
           <Grid container direction="column" justify="center" alignItems="flex-start" spacing={2}>
-            <Grid item>
-              <TextField label="Title" variant="outlined" />
+            <Grid item className={classes.description}>
+              <TextField label="Title" variant="outlined" fullWidth/>
             </Grid>
             <Grid item className={classes.description}>
               <TextField
@@ -50,7 +57,7 @@ export const AddEvent = ({open, handleClose}) => {
             </Grid>
             <Grid container item direction="row" spacing={1}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid item xs={5}>
+                <Grid item xs={4}>
                   <KeyboardDatePicker
                     disableToolbar
                     variant="inline"
@@ -62,7 +69,7 @@ export const AddEvent = ({open, handleClose}) => {
                     inputVariant="outlined"                        
                   />
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={4}>
                   <KeyboardTimePicker
                     margin="normal"
                     label="Time"
@@ -75,21 +82,21 @@ export const AddEvent = ({open, handleClose}) => {
               </MuiPickersUtilsProvider>
             </Grid>
 
-            <Grid item>
-                <TextField label="Location" variant="outlined" />
+            <Grid item className={classes.inputWidth}>
+                <TextField label="Location" variant="outlined" fullWidth/>
             </Grid>
 
             <Grid container item direction="row" spacing={1}>
-              <Grid item>
+              <Grid item xs={4}>
                 <TextField label="Min People" type="number" variant="outlined" />
               </Grid>
-              <Grid item>
+              <Grid item xs={4}>
                 <TextField label="Max People" type="number" variant="outlined" />
               </Grid>
             </Grid>
 
         <Grid item>
-          <Typography variant="h5" component="h2">
+          <Typography variant="h5" component="h4">
             Contact Information
           </Typography>
         </Grid>
