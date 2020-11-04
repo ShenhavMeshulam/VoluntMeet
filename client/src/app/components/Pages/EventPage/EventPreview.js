@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import {formatDistance} from 'date-fns';
-import {Box, Button, Card, CardActions, CardContent, Typography, makeStyles} from '@material-ui/core';
+import {Box, Button, Card, CardActions, CardContent, Typography, makeStyles, Chip, Grid} from '@material-ui/core';
 import LocationOnIcon from '@material-ui/icons/LocationOnOutlined';
 import WatchLaterIcon from '@material-ui/icons/WatchLaterOutlined';
 
@@ -9,12 +9,12 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(2)
   },
-  header: {
-    paddingBottom: theme.spacing(2)
-  },
   headerDetails: {
     marginLeft: theme.spacing(1),
     color: theme.palette.text.secondary
+  },
+  tags: {
+    padding: `${theme.spacing(1)}px 0`
   },
   icon: {
     paddingLeft: theme.spacing(1)
@@ -37,7 +37,7 @@ export const EventPreview = ({event = {}, className}) => {
   return (
     <Card className={clsx([classes.root, className])}>
       <CardContent>
-        <Box display="flex" flexDirection="row" justifyContent="space-between" className={classes.header}>
+        <Box display="flex" flexDirection="row" justifyContent="space-between">
           <Box>
             <Typography variant="h5">
               {event.title}
@@ -67,6 +67,15 @@ export const EventPreview = ({event = {}, className}) => {
             }
           </Box>
         </Box>
+        <Grid container spacing={1} className={classes.tags}>
+          {
+            event.tags.map(tag => (
+              <Grid item>
+                <Chip label={tag} variant="outlined" size="small" />
+              </Grid>
+            ))
+          }
+        </Grid>
         <Typography variant="body1" className={classes.description}>
           {event.description}
         </Typography>
