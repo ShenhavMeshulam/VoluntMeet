@@ -31,9 +31,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const EventPreview = ({event = {}, className}) => {
+export const EventPreview = ({event = {}, className, handleDialogOpen}) => {
   const classes = useStyles();
-
   return (
     <Card className={clsx([classes.root, className])}>
       <CardContent>
@@ -43,7 +42,7 @@ export const EventPreview = ({event = {}, className}) => {
               {event.title}
             </Typography>
             <Typography variant="body1" className={classes.headerDetails}>
-              By {event.author}
+              By {event.creator.name}
             </Typography>
           </Box>
           <Box display="flex" flexDirection="column" alignItems="flex-end" justifyContent="space-around">
@@ -81,7 +80,7 @@ export const EventPreview = ({event = {}, className}) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button className={classes.showButton} variant="contained" color="primary">Tell Me More</Button>
+        <Button className={classes.showButton} onClick={() => handleDialogOpen(event)} variant="contained" color="primary">Tell Me More</Button>
       </CardActions>
     </Card>
   );

@@ -123,6 +123,8 @@ export default function CustomizedDialogs({isOpen, handleClose, event}) {
   return (
     <div>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={isOpen} fullWidth={true} maxWidth={'lg'}>
+          {event &&
+          <>
           <div className={classes.titleContainer}>
         <MuiDialogTitle className={classes.title} id="customized-dialog-title" onClose={handleClose}>
           {event.title}
@@ -153,7 +155,7 @@ export default function CustomizedDialogs({isOpen, handleClose, event}) {
           <Typography gutterBottom className={classes.fieldContainer}>
               <EventIcon />
               <div className={classes.propTitle}>Date: </div>
-            {event.date}
+            {event.date.toLocaleDateString("IL").split("/").toString()}
           </Typography>
           <Typography gutterBottom className={classes.fieldContainer}>
               <LocationOnIcon />
@@ -200,11 +202,13 @@ export default function CustomizedDialogs({isOpen, handleClose, event}) {
             </div>
             </div>
             <div className={classes.optionsContainer}>
-          <Button autoFocus className={classes.signUpButton} onClick={} color="primary">
+          <Button autoFocus className={classes.signUpButton} color="primary">
             Sign Me Up!
           </Button>
           </div>
         </MuiDialogActions>
+        </>
+          }
       </Dialog>
     </div>
   );
