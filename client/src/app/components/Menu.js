@@ -8,14 +8,13 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'react-router-dom';
-
-import MenuItems from "./MenuItems";
+import HomeIcon from '@material-ui/icons/Home';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   drawer: {
-    borderRight: '1px solid #9E9E9E',
+    borderRight: '1px solid #525457',
     width: drawerWidth,
     height: '100%',
     flexShrink: 0,
@@ -37,10 +36,21 @@ const useStyles = makeStyles(theme => ({
     overflowX: 'hidden',
     width: theme.spacing(7) + 1
   },
+  iconButton: {
+    color: 'white'
+  },
 }));
 
 export default ({ isOpen }) => {
   const classes = useStyles();
+
+  const MenuItems =
+    [
+      {
+        text: 'test',
+        icon: <HomeIcon className={classes.iconButton} />,
+      }
+    ]
 
   return (
     <Box
@@ -52,7 +62,7 @@ export default ({ isOpen }) => {
       <List>
         {MenuItems.map((menuItem) => (
           <ListItem button component={Link} to={menuItem.route} key={menuItem.text}>
-            <ListItemIcon >
+            <ListItemIcon>
               {menuItem.icon}
             </ListItemIcon>
             <ListItemText primary={menuItem.text} />
