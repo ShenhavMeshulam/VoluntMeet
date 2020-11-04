@@ -5,8 +5,10 @@ import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 import Header from "./Header";
 import Menu from "./Menu";
+
 import HomePage from './Pages/HomePage';
 import Test from './Pages/Test';
+import { VolunteersPage } from './Pages/VolunteersPage';
 
 const useStyles = makeStyles(() => ({
   app: {
@@ -44,6 +46,7 @@ export default () => {
           <Menu isOpen={sidenavOpen} />
           <Route exact path="/" component={HomePage} />
           <Route path="/test" component={Test} />
+          <Route path="/volunteers" component={VolunteersPage} />
         </div>
       </Box>
     </Router>
