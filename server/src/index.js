@@ -8,7 +8,7 @@ import cors from 'cors';
 import {ApiRouter} from './routes';
 import {configureMongoose} from './config';
 
-export const startServer = () => {
+export const startApp = () => {
   const app = express();
   const port = process.env.PORT ?? 3000;
 
@@ -22,4 +22,4 @@ export const startServer = () => {
 };
 
 configureMongoose()
-  .then(startServer);
+  .then(startApp);
