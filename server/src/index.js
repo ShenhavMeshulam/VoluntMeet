@@ -1,15 +1,17 @@
-const express = require('express')
-const app = express()
-const cors = require('cors')
+import 'dotenv/config';
 
-const port = process.env.PORT ?? 3000
+import express from 'express';
+import cors from 'cors';
+
+import {ApiRouter} from './routes';
+
+const app = express();
+const port = process.env.PORT ?? 3000;
 
 app.use(cors());
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+app.use('/api', ApiRouter());
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+    console.log(`Example app listening at http://localhost:${port}`);
+});
