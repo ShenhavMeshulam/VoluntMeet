@@ -9,7 +9,16 @@ export const EventController = () => {
       .catch(next);
   }
 
+  const create = (req, res, next) => {
+    Event.create(req.body)
+      .then(event => {
+        res.send(event);
+      })
+      .catch(next);
+  }
+
   return {
-    getAll
+    getAll,
+    create
   }
 }

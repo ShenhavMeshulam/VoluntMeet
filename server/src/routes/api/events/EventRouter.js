@@ -6,6 +6,7 @@ export const EventRouter = () => {
   const controller = EventController();
 
   router.get('/', controller.getAll);
+  router.post('/', controller.create);
 
   return router;
 }
