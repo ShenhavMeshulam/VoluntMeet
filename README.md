@@ -1,2 +1,2 @@
 # VoluntMeet
-Platform for how want to volunteer or wand to create volunteering
+Platform for how wants to volunteer or wants to create volunteering
