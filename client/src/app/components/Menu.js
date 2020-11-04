@@ -35,10 +35,7 @@ const useStyles = makeStyles(theme => ({
     }),
     overflowX: 'hidden',
     width: theme.spacing(7) + 1
-  },
-  iconButton: {
-    color: 'white'
-  },
+  }
 }));
 
 export default ({ isOpen }) => {
@@ -48,7 +45,8 @@ export default ({ isOpen }) => {
     [
       {
         text: 'test',
-        icon: <HomeIcon className={classes.iconButton} />,
+        icon: <HomeIcon />,
+        route: '/test'
       }
     ]
 

@@ -13,8 +13,7 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    width: '100%',
-    color: 'white',
+    width: '100%'
   },
   contet: {
     display: 'flex',
