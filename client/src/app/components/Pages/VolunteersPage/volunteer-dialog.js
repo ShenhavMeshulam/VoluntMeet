@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import Chip from '@material-ui/core/Chip';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
@@ -10,20 +11,23 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import PersonIcon from '@material-ui/icons/Person';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import GroupIcon from '@material-ui/icons/Group';
 import CommentIcon from '@material-ui/icons/Comment';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import SubjectIcon from '@material-ui/icons/Subject';
 import CloseIcon from '@material-ui/icons/Close';
+import PhoneIcon from '@material-ui/icons/Phone';
 import IconButton from '@material-ui/core/IconButton';
-import { SuccessDialog } from '../../SuccessDialog';
 
 const useStyles = makeStyles((theme) => ({
     titleContainer: {
         display: 'flex',
         justifyContent: 'space-between',
-        backgroundColor: 'lightblue'
+        backgroundColor: theme.palette.primary.main,
+        color: 'white'
     },
     creatorContainer: {
         display: 'flex',
@@ -42,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
         margin: 0,
         textTransform: 'uppercase',
         padding: theme.spacing(2.5),
-        flexWrap: 'auto'
+        flexWrap: 'auto',
     },
     fieldContainer : {
           display: 'flex',
@@ -59,34 +63,36 @@ const useStyles = makeStyles((theme) => ({
         flexFlow: 'row',
         justifyContent: 'space-between',
         padding: theme.spacing(2),
-        backgroundColor: 'grey'
       },
       dialogActions: {
         display: 'flex',
         justifyContent: 'space-between',
         margin: 0,
         padding: theme.spacing(1),
-        backgroundColor: 'grey'
+        color: theme.palette.text.primary
       },
       closeButton: {
         textTransform: 'capitalize',
         fontSize: '20px',
-        color: 'black'
+        color: 'white'
       },
       signUpButton: {
         textTransform: 'capitalize',
         fontSize: '15px',
         fontWeight: '500',
-        color: 'black',
-        backgroundColor: 'lightblue'
+        color: 'white',
+        backgroundColor: theme.palette.primary.main
       },
       socialContainer: {
           display: 'flex',
           flexFlow: 'row',
           marginTop: '6px',
-          paddingLeft: theme.spacing(3)
+          paddingLeft: theme.spacing(3),
+          '& > *': {
+            margin: theme.spacing(0.5),
+          },
       },
-      commentsContainer: {
+      socialStatContainer: {
           display: 'flex',
           flexFlow: 'row'
       },
@@ -97,7 +103,8 @@ const useStyles = makeStyles((theme) => ({
           display: 'flex',
           flexFlow: 'column',
           alignItems: 'flex-start',
-          flex: 'auto'
+          flex: 'auto',
+          paddingTop: '30px'
       },
       image: {
           width: '70%',
@@ -118,24 +125,16 @@ const useStyles = makeStyles((theme) => ({
       }
     }));
 
-export default function CustomizedDialogs({isOpen, handleClose, event}) {
+const EventDialog = ({isOpen, handleClose, event}) => {
   const classes = useStyles();
-
-  const [isSuccessDialogOpen, setSuccessDialogOpen] = useState(false);
-  const handleSuccessClickOpen = () => {
-    setSuccessDialogOpen(true);
-  };
-  const handleSuccessClose = () => {
-    setSuccessDialogOpen(false);
-  };
 
   return (
     <div>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={isOpen} fullWidth={true} maxWidth={'lg'}>
+      <Dialog onClose={handleClose} open={isOpen} fullWidth={true} maxWidth={'lg'}>
           {event &&
           <>
           <div className={classes.titleContainer}>
-        <MuiDialogTitle className={classes.title} id="customized-dialog-title" onClose={handleClose}>
+        <MuiDialogTitle className={classes.title} onClose={handleClose}>
           {event.title}
         </MuiDialogTitle>
         <IconButton autoFocus className={classes.closeButton} onClick={handleClose} color="primary">
@@ -146,13 +145,7 @@ export default function CustomizedDialogs({isOpen, handleClose, event}) {
             <div className={classes.eventDetails}>
             <div className={classes.tagsContainer}>
             { event.tags.map(tag => {
-                return (
-            <Chip
-                size="small"
-                label={tag}
-                avatar={<LocalOfferIcon />}
-            />
-            )
+                return ( <Chip size="small" label={tag} avatar={<LocalOfferIcon />} /> )
             })
             }
             </div>
@@ -169,10 +162,21 @@ export default function CustomizedDialogs({isOpen, handleClose, event}) {
           <Typography gutterBottom className={classes.fieldContainer}>
               <LocationOnIcon />
               <div className={classes.propTitle}>Location: </div>
-            {event.location}
+            {/* {event.location} */}
+                <Map google={this.props.google} zoom={14}>
+ 
+                    <Marker onClick={this.onMarkerClick}
+                        name={'Current location'} />
+ 
+                    <InfoWindow onClose={this.onInfoWindowClose}>
+                    <div>
+                    <h1>{this.state.selectedPlace.name}</h1>
+                    </div>
+                    </InfoWindow>
+                </Map>
           </Typography>
           <Typography gutterBottom className={classes.fieldContainer}>
-              <GroupIcon />
+            <PersonIcon />
               <div className={classes.propTitle}>Minimum People: </div>
            {event.minimunPeople}
           </Typography>
@@ -189,12 +193,12 @@ export default function CustomizedDialogs({isOpen, handleClose, event}) {
           </div>
           <div className={classes.otherDetailsContainer}>
             <Typography gutterBottom className={classes.fieldContainer}>
-                <DescriptionIcon />
+                <SubjectIcon />
                 <div className={classes.propTitle}>Full Name: </div>
                 {event.creator.name}
             </Typography>
             <Typography gutterBottom className={classes.fieldContainer}>
-                <DescriptionIcon />
+                <PhoneIcon />
                 <div className={classes.propTitle}>Phone Number: </div>
                 {event.creator.phoneNumber}
             </Typography>
@@ -203,18 +207,19 @@ export default function CustomizedDialogs({isOpen, handleClose, event}) {
         </MuiDialogContent>
         <MuiDialogActions className={classes.dialogActions}>
             <div className={classes.socialContainer}>
+            <div className={classes.socialStatContainer}>
             <div className={classes.socialDetails}>{event.likes}</div>
             <FavoriteIcon color={'error'}/>
-            <div className={classes.commentsContainer}>
+            </div>
+            <div className={classes.socialStatContainer}>
                 <div className={classes.socialDetails}>{event.comments.length}</div>
                 <CommentIcon />
             </div>
             </div>
             <div className={classes.optionsContainer}>
-          <Button autoFocus className={classes.signUpButton} color="primary" onClick={handleSuccessClickOpen}>
+          <Button autoFocus className={classes.signUpButton} variant="contained" color="primary">
             Sign Me Up!
           </Button>
-          <SuccessDialog open={isSuccessDialogOpen} handleClose={handleSuccessClose} />
           </div>
         </MuiDialogActions>
         </>
@@ -223,3 +228,7 @@ export default function CustomizedDialogs({isOpen, handleClose, event}) {
     </div>
   );
 }
+
+export default GoogleApiWrapper({
+    apiKey: ("AIzaSyARL7bYxZ10--R_d708Uxfh40pZxzXp_us")
+  })(EventDialog)

@@ -7,7 +7,8 @@ import WatchLaterIcon from '@material-ui/icons/WatchLaterOutlined';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    cursor: 'pointer'
   },
   headerDetails: {
     marginLeft: theme.spacing(1),
@@ -34,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 export const EventPreview = ({ event = {}, className, handleDialogOpen }) => {
   const classes = useStyles();
   return (
-    <Card className={clsx([classes.root, className])}>
+    <Card className={clsx([classes.root, className])} onClick={() => handleDialogOpen(event)}>
       <CardContent>
         <Box display="flex" flexDirection="row" justifyContent="space-between">
           <Box>
