@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import Chip from '@material-ui/core/Chip';
@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
+import { SuccessDialog } from '../../SuccessDialog';
 
 const useStyles = makeStyles((theme) => ({
     titleContainer: {
@@ -120,6 +121,14 @@ const useStyles = makeStyles((theme) => ({
 export default function CustomizedDialogs({isOpen, handleClose, event}) {
   const classes = useStyles();
 
+  const [isSuccessDialogOpen, setSuccessDialogOpen] = useState(false);
+  const handleSuccessClickOpen = () => {
+    setSuccessDialogOpen(true);
+  };
+  const handleSuccessClose = () => {
+    setSuccessDialogOpen(false);
+  };
+
   return (
     <div>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={isOpen} fullWidth={true} maxWidth={'lg'}>
@@ -202,9 +211,10 @@ export default function CustomizedDialogs({isOpen, handleClose, event}) {
             </div>
             </div>
             <div className={classes.optionsContainer}>
-          <Button autoFocus className={classes.signUpButton} color="primary">
+          <Button autoFocus className={classes.signUpButton} color="primary" onClick={handleSuccessClickOpen}>
             Sign Me Up!
           </Button>
+          <SuccessDialog open={isSuccessDialogOpen} handleClose={handleSuccessClose} />
           </div>
         </MuiDialogActions>
         </>
