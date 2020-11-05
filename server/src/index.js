@@ -15,9 +15,11 @@ export const startApp = () => {
 
   app.use(cors());
   app.use(express.json());
+  app.use(express.static('public'));
 
   app.use('/api', ApiRouter());
   app.use(ErrorHandlerMiddleware);
+  app.use((req, res) = res.render('index.html'));
 
   app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
