@@ -97,8 +97,8 @@ export const EventPage = () => {
       </div>
       <Grid container spacing={2} className={classes.eventList}>
         {events.map((event, index) => (
-          <Grid item xs={12} md={6} lg={4}>
-            <EventPreview key={index} event={event} handleDialogOpen={() => handleOpenDialog(event)} />
+          <Grid key={index} item xs={12} md={6} lg={4}>
+            <EventPreview event={event} handleDialogOpen={() => handleOpenDialog(event)} />
           </Grid>
         ))}
         <EventDialog event={selectedEvent} isOpen={!!selectedEvent} handleClose={handleCloseDialog} />

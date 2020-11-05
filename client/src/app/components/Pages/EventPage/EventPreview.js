@@ -69,7 +69,7 @@ export const EventPreview = ({ event = {}, className, handleDialogOpen }) => {
         <Grid container spacing={1} className={classes.tags}>
           {
             event.tags.map(tag => (
-              <Grid item>
+              <Grid key={tag} item>
                 <Chip label={tag} variant="outlined" size="small" />
               </Grid>
             ))
