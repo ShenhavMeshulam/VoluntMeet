@@ -3,4 +3,8 @@ html, body, #app {
     padding: 0;
     height: 100%;
     width: 100%;
+    background-image: url(https://www.womankindbristol.org.uk/wp-content/uploads/2017/11/volunteer_header.jpg);
+    background-size: inherit;
+    background-position: bottom;
+    background-repeat: no-repeat;
 }

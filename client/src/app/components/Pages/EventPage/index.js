@@ -76,9 +76,6 @@ export const EventPage = () => {
 
   return (
     <div className={classes.div}>
-      {/* <img src="https://hospitals.clalit.co.il/shalvata/he/about_us/PublishingImages/Article/shutterstock_324632651%D7%94%D7%AA%D7%A0%D7%93%D7%91%D7%95%D7%AA.jpg" alt="x" width="100%" height="300"></img> */}
-      <img src="https://www.jerusalem.muni.il/media/11780/education_b_06.png" alt="x" width="100%" height="400"></img>
-      {/* <img src="https://images.globes.co.il/images/NewGlobes/big_image_800/2019/F9849A6B17CDFCA053B13FA038BA269F_800x392.20190814T175815.jpg" alt="x" width="100%" height="400"></img> */}
       <div className={classes.searchBox}>
         <div className={classes.searchInput}>
           <ReactSearchBox
