@@ -80,7 +80,7 @@ export const EventPreview = ({ event = {}, className, handleDialogOpen }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button className={classes.showButton} onClick={() => handleDialogOpen(event)} variant="contained" color="primary">Tell Me More</Button>
+        <Button className={classes.showButton} onClick={() => handleDialogOpen(event)} variant="contained" color="secondary">Tell Me More</Button>
       </CardActions>
     </Card>
   );

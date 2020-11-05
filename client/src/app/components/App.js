@@ -8,6 +8,8 @@ import Header from "./Header";
 
 import { EventPage } from './Pages/EventPage';
 import { AddEvent } from './Pages/AddEvent/AddEvent';
+import theme from "../theme";
+import {MuiThemeProvider} from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   app: {
@@ -44,10 +46,11 @@ export default () => {
   };
 
   return (
-    <Router>
-      <Box className={classes.app}>
-        <Header />
-        <div className={classes.contet}>
+      <MuiThemeProvider theme={theme}>
+        <Router>
+          <Box className={classes.app}>
+            <Header />
+            <div className={classes.contet}>
           <Switch>
             <Route exact path="/" component={EventPage} />
           </Switch>
@@ -55,8 +58,9 @@ export default () => {
             Add Event
           </Button>
           <AddEvent open={open} handleClose={handleClose} />
-        </div>
-      </Box>
-    </Router>
+            </div>
+          </Box>
+        </Router>
+      </MuiThemeProvider>
   );
 }

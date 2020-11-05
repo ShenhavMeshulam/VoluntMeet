@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
 
 const useStyles = makeStyles(() => ({
   appBar: {
@@ -9,7 +10,7 @@ const useStyles = makeStyles(() => ({
     height: '4rem',
   },
   toolbar: {
-    padding: '0px'
+    padding: '0 20px'
   }
 }));
 
@@ -19,9 +20,10 @@ export default () => {
   return (
     <AppBar position="static" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
-        <Typography variant="h6">
+        <Typography variant="h4">
           VoluntMeet
           </Typography>
+        <AccessibilityNewIcon/>
       </Toolbar>
     </AppBar>
   );
