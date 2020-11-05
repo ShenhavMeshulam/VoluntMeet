@@ -15,6 +15,17 @@ const commentSchema = new Schema({
   }
 });
 
+const creatorSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  phoneNumber: {
+    type: String,
+    required: true
+  }
+})
+
 const schema = new Schema({
   title: {
     type: String,
@@ -22,6 +33,10 @@ const schema = new Schema({
   },
   description: {
     type: String,
+    required: true
+  },
+  creator: {
+    type: creatorSchema,
     required: true
   },
   date: {
