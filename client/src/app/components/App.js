@@ -7,7 +7,7 @@ import Header from "./Header";
 
 import { EventPage } from './Pages/EventPage';
 import theme from "../theme";
-import {MuiThemeProvider} from "@material-ui/core/styles";
+import { MuiThemeProvider } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   app: {
@@ -19,7 +19,8 @@ const useStyles = makeStyles(() => ({
   contet: {
     display: 'flex',
     flexDirection: 'row',
-    height: '100%'
+    height: '100%',
+    width: '100%'
   },
   page: {
     margin: '16px',
@@ -31,17 +32,17 @@ export default () => {
   const classes = useStyles();
 
   return (
-      <MuiThemeProvider theme={theme}>
-        <Router>
-          <Box className={classes.app}>
-            <Header />
-            <div className={classes.contet}>
-          <Switch>
-            <EventPage />
-          </Switch>
-            </div>
-          </Box>
-        </Router>
-      </MuiThemeProvider>
+    <MuiThemeProvider theme={theme}>
+      <Router>
+        <Box className={classes.app}>
+          <Header />
+          <div className={classes.contet}>
+            <Switch width='100%'>
+              <EventPage />
+            </Switch>
+          </div>
+        </Box>
+      </Router>
+    </MuiThemeProvider>
   );
 }
