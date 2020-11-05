@@ -9,21 +9,27 @@ import {useEvent} from '../../../hooks';
 
 const useStyles = makeStyles(theme => ({
   eventList: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    width: '100%'
   },
   searchBox: {
-    width: '600px'
+    display: 'flex'
   },
   addButton: {
-    postion: 'absolute',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2)
+    justifyContent: 'center',
+    width: '100%',
+    paddingTop: '20px'
   },
   addButton: {
     position: 'absolute',
     bottom: '10px',
     right: '10px'
   },
+  searchInput: {
+    width: '800px',
+    margin: 'auto',
+    marginTop: theme.spacing(2)
+  }
 }));
 
 export const EventPage = () => {
@@ -41,7 +47,9 @@ export const EventPage = () => {
   }
 
   const handleSearchOnChange = (data) => {
-    setEvents(eventsSeed.filter(x => x.title.includes(data) || x.description.includes(data) || x.location.includes(data) || x.tags.find(x => x.includes(data)) || x.creator.name.includes(data)))//| )
+    setEvents(eventsSeed.filter(x => x.title.toLocaleLowerCase().includes(data) ||
+     x.description.includes(data) || x.location.includes(data) ||
+      x.tags.find(x => x.includes(data)) || x.creator.name.includes(data)))//| )
   }
 
   const createEvent = ({date, time, ...event}) => {
@@ -61,10 +69,13 @@ export const EventPage = () => {
   return (
     <div>
       <div className={classes.searchBox}>
-        <ReactSearchBox
-          placeholder="Search"
-          onChange={handleSearchOnChange}
-        />
+        <div className={classes.searchInput}>
+          <ReactSearchBox
+            placeholder="Search"
+            onChange={handleSearchOnChange}
+            inputBoxBorderColor={'black'}
+          />
+        </div>
       </div>
       <Grid container spacing={2} className={classes.eventList}>
         {events.map((event, index) => (
