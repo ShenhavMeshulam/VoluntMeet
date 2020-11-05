@@ -7,7 +7,7 @@ import { Grid, TextField, Typography, Button, InputAdornment  } from '@material-
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
-import ChipInput from 'material-ui-chip-input'
+import {TagsInput} from '../../TagsInput';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -35,7 +35,7 @@ export const AddEvent = ({ open, handleClose }) => {
   const classes = useStyles();
   const [time, setTime] = useState();
   const [date, setDate] = useState();
-  const {register, handleSubmit} = useForm();
+  const {register, control, handleSubmit} = useForm();
 
   const createEvent = (event) => {
     console.log(event);
@@ -118,7 +118,7 @@ export const AddEvent = ({ open, handleClose }) => {
           </Grid>
 
           <Grid item className={classes.inputWidth}>
-            <ChipInput label="tags" fullWidth/>
+            <TagsInput name="tags" label="tags" fullWidth control={control} />
           </Grid>
           {/* onChange={(chips) => handleChange(chips)} */}
           <Grid item>
