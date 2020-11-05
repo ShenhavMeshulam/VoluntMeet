@@ -1,6 +1,6 @@
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Grid, TextField, Typography, Button, InputAdornment  } from '@material-ui/core';
@@ -13,6 +13,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import {useForm} from 'react-hook-form';
 
 const useStyles = makeStyles(theme => ({
   headline: {
@@ -32,11 +33,13 @@ const useStyles = makeStyles(theme => ({
 
 export const AddEvent = ({ open, handleClose }) => {
   const classes = useStyles();
+  const [time, setTime] = useState();
+  const [date, setDate] = useState();
+  const {register, handleSubmit} = useForm();
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
+  const createEvent = (event) => {
+    console.log(event);
+  }
 
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -45,19 +48,22 @@ export const AddEvent = ({ open, handleClose }) => {
           Add Volunteering Event
           </Typography>
       </DialogTitle>
+      <form onSubmit={handleSubmit(createEvent)}>
       <DialogContent>
         <Grid container direction="column" justify="center" alignItems="flex-start" spacing={2}>
           <Grid item className={classes.description}>
-            <TextField label="Title" variant="outlined" fullWidth />
+            <TextField name="title" label="Title" variant="outlined" fullWidth inputRef={register} />
           </Grid>
           <Grid item className={classes.description}>
             <TextField
+              name="description"
               label="Description"
               multiline
               rows={4}
               placeholder="Tell us about your event..."
               variant="outlined"
               fullWidth
+              inputRef={register}
             />
           </Grid>
           <Grid container item direction="row" spacing={1}>
@@ -65,45 +71,49 @@ export const AddEvent = ({ open, handleClose }) => {
               <Grid item xs={4}>
                 <KeyboardDatePicker
                   disableToolbar
-                  variant="inline"
                   format="dd/MM/yyyy"
                   margin="normal"
                   label="Date"
-                  value={selectedDate}
-                  onChange={handleDateChange}
                   inputVariant="outlined"
+                  value={date}
+                  onChange={value => setDate(value)}
+                  name="date"
+                  inputRef={register}
                 />
               </Grid>
               <Grid item xs={4}>
                 <KeyboardTimePicker
                   margin="normal"
                   label="Time"
-                  value={selectedDate}
-                  onChange={handleDateChange}
                   inputVariant="outlined"
                   keyboardIcon={<ScheduleIcon />}
+                  name="time"
+                  inputRef={register}
+                  value={time}
+                  onChange={value => setTime(value)}
                 />
               </Grid>
             </MuiPickersUtilsProvider>
           </Grid>
 
           <Grid item className={classes.inputWidth}>
-            <TextField label="Location" variant="outlined" fullWidth 
+            <TextField name="location" label="Location" variant="outlined" fullWidth 
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
                     <LocationOnOutlinedIcon className={classes.locationIcon} />
                   </InputAdornment>
                 ),
-              }}/>
+              }}
+              inputRef={register}/>
           </Grid>
 
           <Grid container item direction="row" spacing={1}>
             <Grid item xs={4}>
-              <TextField label="Min People" type="number" variant="outlined" />
+              <TextField name="minPeople" label="Min People" type="number" variant="outlined" inputRef={register}/>
             </Grid>
             <Grid item xs={4}>
-              <TextField label="Max People" type="number" variant="outlined" />
+              <TextField name="maxPeople" label="Max People" type="number" variant="outlined" inputRef={register} />
             </Grid>
           </Grid>
 
@@ -118,21 +128,22 @@ export const AddEvent = ({ open, handleClose }) => {
           </Grid>
 
           <Grid item>
-            <TextField label="Full Name" variant="outlined" />
+            <TextField name="creator.name" label="Full Name" variant="outlined" inputRef={register} />
           </Grid>
           <Grid item>
-            <TextField label="Phone Number" variant="outlined" />
+            <TextField name="creator.phoneNumber" label="Phone Number" variant="outlined" inputRef={register} />
           </Grid>
         </Grid>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="default">
           Cancel
-          </Button>
-        <Button onClick={handleClose} color="primary" variant="contained">
+        </Button>
+        <Button color="primary" variant="contained" type="submit">
           Add
-          </Button>
+        </Button>
       </DialogActions>
+      </form>
     </Dialog>
   );
 };
