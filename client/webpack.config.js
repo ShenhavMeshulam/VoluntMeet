@@ -40,6 +40,11 @@ module.exports = {
     },
     devServer: {
         historyApiFallback: true,
+        proxy: {
+            '/api/events': {
+                target: 'http://localhost:3000'
+            }
+        }
     },
     plugins: [
         new HtmlWebpackPlugin({

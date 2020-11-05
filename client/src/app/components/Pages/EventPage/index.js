@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useMemo} from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 import EventDialog from '../VolunteersPage/volunteer-dialog';
 
 import { EventPreview } from './EventPreview';
 import ReactSearchBox from 'react-search-box'
 import { AddEventButton } from '../AddEventButton';
+import {useEvent} from '../../../hooks';
 
 const useStyles = makeStyles(theme => ({
   eventList: {
@@ -25,67 +26,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const seedEvents = [
-  {
-    title: 'Title',
-    author: 'Dori',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pellentesque, nisi id consequat lacinia, risus urna facilisis quam, vitae venenatis urna velit et nisl. Morbi id nibh non augue accumsan vulputate at et mi. Etiam hendrerit, purus dignissim placerat iaculis, ligula risus ornare leo, nec vulputate lectus lectus in nisl. Aenean sodales euismod tortor sed posuere. Mauris dignissim tempus odio, a porttitor lacus efficitur ut. Cras eget auctor velit. Nullam lacinia tempus scelerisque. Donec efficitur odio a felis convallis, lacinia pretium erat molestie. Sed convallis eros a lorem eleifend, eget gravida felis porttitor. Morbi efficitur rutrum turpis.',
-    location: 'Yehud',
-    date: new Date('16:00 11/10/2020'),
-    tags: ['Engineering', 'Development'],
-    minimunPeople: 10,
-    maxPeople: 100,
-    arrivingAmount: 50,
-    creator: {
-      name: 'Yuval Shlefer',
-      phoneNumber: '0546976974'
-    },
-    image: '',
-    comments: ['great', 'success'],
-    likes: 50
-  },
-  {
-    title: 'Title',
-    author: 'Dori',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pellentesque, nisi id consequat lacinia, risus urna facilisis quam, vitae venenatis urna velit et nisl. Morbi id nibh non augue accumsan vulputate at et mi. Etiam hendrerit, purus dignissim placerat iaculis, ligula risus ornare leo, nec vulputate lectus lectus in nisl. Aenean sodales euismod tortor sed posuere. Mauris dignissim tempus odio, a porttitor lacus efficitur ut. Cras eget auctor velit. Nullam lacinia tempus scelerisque. Donec efficitur odio a felis convallis, lacinia pretium erat molestie. Sed convallis eros a lorem eleifend, eget gravida felis porttitor. Morbi efficitur rutrum turpis.',
-    location: 'Rishon Letzion',
-    date: new Date('16:00 11/10/2020'),
-    tags: ['Engineering', 'Development'],
-    minimunPeople: 10,
-    maxPeople: 100,
-    arrivingAmount: 50,
-    creator: {
-      name: 'Dori',
-      phoneNumber: '0546976974'
-    },
-    image: '',
-    comments: ['great', 'success'],
-    likes: 50
-  },
-  {
-    title: 'Title',
-    author: 'Dori',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pellentesque, nisi id consequat lacinia, risus urna facilisis quam, vitae venenatis urna velit et nisl. Morbi id nibh non augue accumsan vulputate at et mi. Etiam hendrerit, purus dignissim placerat iaculis, ligula risus ornare leo, nec vulputate lectus lectus in nisl. Aenean sodales euismod tortor sed posuere. Mauris dignissim tempus odio, a porttitor lacus efficitur ut. Cras eget auctor velit. Nullam lacinia tempus scelerisque. Donec efficitur odio a felis convallis, lacinia pretium erat molestie. Sed convallis eros a lorem eleifend, eget gravida felis porttitor. Morbi efficitur rutrum turpis.',
-    location: 'Rishon Letzion',
-    date: new Date('16:00 11/10/2020'),
-    tags: ['Engineering', 'Development'],
-    minimunPeople: 10,
-    maxPeople: 100,
-    arrivingAmount: 50,
-    creator: {
-      name: 'Yuval Shlefer',
-      phoneNumber: '0546976974'
-    },
-    image: '',
-    comments: ['great', 'success'],
-    likes: 50
-  }
-];
-
 export const EventPage = () => {
   const classes = useStyles();
   const [selectedEvent, setSelectedEvent] = useState();
-  const [events, setEvents] = useState(seedEvents);
+  const [events, setEvents] = useState([]);
+  const {create, getAll} = useEvent();
 
   const handleOpenDialog = (event) => {
     setSelectedEvent(event);
@@ -95,14 +40,23 @@ export const EventPage = () => {
     setSelectedEvent();
   }
 
-
   const handleSearchOnChange = (data) => {
     setEvents(eventsSeed.filter(x => x.title.includes(data) || x.description.includes(data) || x.location.includes(data) || x.tags.find(x => x.includes(data)) || x.creator.name.includes(data)))//| )
   }
 
-  const createEvent = (event) => {
-    console.log(event)
+  const createEvent = ({date, time, ...event}) => {
+    const entity = {...event, date: `${date} ${time}`};
+
+    console.log('create');
+
+    return create(entity)
+      .then(newEntity => setEvents(x => [...x, newEntity]));
   }
+
+  useMemo(() => {
+    getAll()
+      .then(x => setEvents(x))
+  }, []);
 
   return (
     <div>

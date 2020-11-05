@@ -37,7 +37,7 @@ export default () => {
             <Header />
             <div className={classes.contet}>
           <Switch>
-            <Route exact path="/" component={EventPage} />
+            <EventPage />
           </Switch>
             </div>
           </Box>

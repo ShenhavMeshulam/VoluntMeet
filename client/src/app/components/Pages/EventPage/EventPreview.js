@@ -51,7 +51,7 @@ export const EventPreview = ({ event = {}, className, handleDialogOpen }) => {
               event.date &&
               <Box display="flex" flexDirection="row" alignItems="center">
                 <Typography>
-                  {formatDistance(event.date, new Date(), { addSuffix: true })}
+                  {formatDistance(new Date(event.date), new Date(), { addSuffix: true })}
                 </Typography>
                 <WatchLaterIcon className={classes.icon} />
               </Box>

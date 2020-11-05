@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import Chip from '@material-ui/core/Chip';
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
@@ -21,6 +20,7 @@ import SubjectIcon from '@material-ui/icons/Subject';
 import CloseIcon from '@material-ui/icons/Close';
 import PhoneIcon from '@material-ui/icons/Phone';
 import IconButton from '@material-ui/core/IconButton';
+import {format} from 'date-fns';
 
 const useStyles = makeStyles((theme) => ({
   titleContainer: {
@@ -158,7 +158,7 @@ export default function CustomizedDialogs({ isOpen, handleClose, event }) {
                 <Typography gutterBottom className={classes.fieldContainer}>
                   <EventIcon />
                   <div className={classes.propTitle}>Date: </div>
-                  {event.date.toLocaleDateString("IL").split("/").toString()}
+                  {format(new Date(event.date), 'dd/MM/yyyy HH:mm')}
                 </Typography>
                 <Typography gutterBottom className={classes.fieldContainer}>
                   <LocationOnIcon />
@@ -220,7 +220,7 @@ export default function CustomizedDialogs({ isOpen, handleClose, event }) {
               <div className={classes.optionsContainer}>
                 <Button autoFocus className={classes.signUpButton} variant="contained" color="primary">
                   Sign Me Up!
-          </Button>
+                </Button>
               </div>
             </MuiDialogActions>
           </>

@@ -31,15 +31,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const AddEventDialog = ({ open, handleClose }) => {
+export const AddEventDialog = ({ open, handleClose, onAdd }) => {
   const classes = useStyles();
   const [time, setTime] = useState();
   const [date, setDate] = useState();
   const {register, control, handleSubmit} = useForm();
-
-  const createEvent = (event) => {
-    console.log(event);
-  }
 
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -48,7 +44,7 @@ export const AddEventDialog = ({ open, handleClose }) => {
           Add Volunteering Event
           </Typography>
       </DialogTitle>
-      <form onSubmit={handleSubmit(createEvent)}>
+      <form onSubmit={handleSubmit(onAdd)}>
       <DialogContent>
         <Grid container direction="column" justify="center" alignItems="flex-start" spacing={2}>
           <Grid item className={classes.description}>
