@@ -22,6 +22,7 @@
     "google-maps-react": "^2.0.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-hook-google-maps": "0.0.3",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.1.2",
     "some-react-hooks": "^1.0.5",

@@ -1,8 +1,8 @@
 import React from 'react';
-import {Grid, makeStyles} from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import EventDialog from '../VolunteersPage/volunteer-dialog';
 
-import {EventPreview} from './EventPreview';
+import { EventPreview } from './EventPreview';
 
 const useStyles = makeStyles(theme => ({
   eventList: {
@@ -21,7 +21,7 @@ export const EventPage = () => {
   const handleCloseDialog = () => {
     setSelectedEvent();
   }
-  
+
   const events = [
     {
       title: 'Title',
@@ -84,10 +84,10 @@ export const EventPage = () => {
       <Grid container spacing={2} className={classes.eventList}>
         {events.map((event, index) => (
           <Grid item xs={12} md={6} lg={4}>
-            <EventPreview key={index} event={event} handleDialogOpen={() => handleOpenDialog(event)}/>
+            <EventPreview key={index} event={event} handleDialogOpen={() => handleOpenDialog(event)} />
           </Grid>
         ))}
-        <EventDialog event={selectedEvent} isOpen={!!selectedEvent} handleClose={handleCloseDialog}/>
+        <EventDialog event={selectedEvent} isOpen={!!selectedEvent} handleClose={handleCloseDialog} />
       </Grid>
     </div>
   )
