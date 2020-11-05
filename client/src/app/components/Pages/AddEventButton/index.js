@@ -8,7 +8,8 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     position: 'absolute',
     right: '38px',
-    bottom: '18px'
+    bottom: '18px',
+    fontSize: '18px'
   },
 }));
 
