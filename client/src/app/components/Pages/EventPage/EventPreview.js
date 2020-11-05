@@ -30,6 +30,9 @@ const useStyles = makeStyles(theme => ({
   showButton: {
     textTransform: 'capitalize',
     color: theme.palette.background.default
+  },
+  content: {
+    flex: 1
   }
 }));
 
@@ -37,7 +40,7 @@ export const EventPreview = ({ event = {}, className, handleDialogOpen }) => {
   const classes = useStyles();
   return (
     <Card className={clsx([classes.root, className])} onClick={() => handleDialogOpen(event)}>
-      <CardContent>
+      <CardContent className={classes.content}>
         <Box display="flex" flexDirection="row" justifyContent="space-between">
           <Box>
             <Typography variant="h5">

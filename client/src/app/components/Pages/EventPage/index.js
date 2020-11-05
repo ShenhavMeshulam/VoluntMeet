@@ -32,6 +32,11 @@ const useStyles = makeStyles(theme => ({
     width: '800px',
     margin: 'auto',
     marginTop: theme.spacing(2)
+  },
+  eventPreview: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%'
   }
 }));
 
@@ -86,7 +91,7 @@ export const EventPage = () => {
       <Grid container spacing={2} className={classes.eventList}>
         {events.map((event, index) => (
           <Grid item xs={12} md={6} lg={4}>
-            <EventPreview key={index} event={event} handleDialogOpen={() => handleOpenDialog(event)} />
+            <EventPreview key={index} className={classes.eventPreview} event={event} handleDialogOpen={() => handleOpenDialog(event)} />
           </Grid>
         ))}
         <EventDialog event={selectedEvent} isOpen={!!selectedEvent} handleClose={handleCloseDialog} />
