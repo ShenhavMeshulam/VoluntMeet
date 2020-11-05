@@ -96,7 +96,8 @@ const useStyles = makeStyles((theme) => ({
   },
   socialStatContainer: {
     display: 'flex',
-    padding: '5px'
+    padding: '5px',
+    alignItems: 'center'
   },
   eventDetails: {
     width: '65%'
@@ -202,11 +203,11 @@ export default function CustomizedDialogs({ isOpen, handleClose, event }) {
             <MuiDialogActions className={classes.dialogActions}>
               <div className={classes.socialContainer}>
                 <div className={classes.socialStatContainer}>
-                  <Typography variant="body1">{event.likes}</Typography>
+                  <Typography variant="h6">{event.likes}</Typography>
                   <FavoriteIcon color={'error'} />
                 </div>
                 <div className={classes.socialStatContainer}>
-                  <Typography variant="body1">{event.comments.length}</Typography>
+                  <Typography variant="h6">{event.comments.length}</Typography>
                   <CommentIcon />
                 </div>
               </div>
