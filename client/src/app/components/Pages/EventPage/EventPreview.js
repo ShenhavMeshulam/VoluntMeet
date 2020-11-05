@@ -28,7 +28,8 @@ const useStyles = makeStyles(theme => ({
     '-webkit-box-orient': 'vertical'
   },
   showButton: {
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
+    color: theme.palette.background.default
   }
 }));
 

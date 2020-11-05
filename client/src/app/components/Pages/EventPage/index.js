@@ -8,21 +8,24 @@ import { AddEventButton } from '../AddEventButton';
 
 const useStyles = makeStyles(theme => ({
   eventList: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    width: '100%'
   },
   searchBox: {
-    width: '600px'
+    display: 'flex',
   },
   addButton: {
     postion: 'absolute',
     bottom: theme.spacing(2),
     right: theme.spacing(2)
   },
-  addButton: {
-    position: 'absolute',
-    bottom: '10px',
-    right: '10px'
+    justifyContent: 'center',
+    width: '100%',
+    paddingTop: '20px'
   },
+  searchInput: {
+    width: '800px'
+  }
 }));
 
 const seedEvents = [
@@ -97,7 +100,9 @@ export const EventPage = () => {
 
 
   const handleSearchOnChange = (data) => {
-    setEvents(eventsSeed.filter(x => x.title.includes(data) || x.description.includes(data) || x.location.includes(data) || x.tags.find(x => x.includes(data)) || x.creator.name.includes(data)))//| )
+    setEvents(eventsSeed.filter(x => x.title.toLocaleLowerCase().includes(data) ||
+     x.description.includes(data) || x.location.includes(data) ||
+      x.tags.find(x => x.includes(data)) || x.creator.name.includes(data)))//| )
   }
 
   const createEvent = (event) => {
@@ -107,10 +112,13 @@ export const EventPage = () => {
   return (
     <div>
       <div className={classes.searchBox}>
+        <div className={classes.searchInput}>
         <ReactSearchBox
           placeholder="Search"
           onChange={handleSearchOnChange}
+          inputBoxBorderColor={'black'}
         />
+        </div>
       </div>
       <Grid container spacing={2} className={classes.eventList}>
         {events.map((event, index) => (
