@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const AddEvent = ({ open, handleClose }) => {
+export const AddEventDialog = ({ open, handleClose }) => {
   const classes = useStyles();
   const [time, setTime] = useState();
   const [date, setDate] = useState();

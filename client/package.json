@@ -27,6 +27,7 @@
     "react-hook-google-maps": "0.0.3",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.1.2",
+    "react-search-box": "^2.0.2",
     "some-react-hooks": "^1.0.5",
     "style-loader": "^1.1.3"
   },

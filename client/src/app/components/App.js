@@ -1,13 +1,11 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import Header from "./Header";
 
 import { EventPage } from './Pages/EventPage';
-import { AddEvent } from './Pages/AddEvent/AddEvent';
 import theme from "../theme";
 import {MuiThemeProvider} from "@material-ui/core/styles";
 
@@ -26,24 +24,11 @@ const useStyles = makeStyles(() => ({
   page: {
     margin: '16px',
     width: '100%',
-  },
-  addEvent: {
-    position: 'absolute',
-    bottom: '10px',
-    right: '10px'
-  },
+  }
 }));
 
 export default () => {
   const classes = useStyles();
-
-  const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
       <MuiThemeProvider theme={theme}>
@@ -54,10 +39,6 @@ export default () => {
           <Switch>
             <Route exact path="/" component={EventPage} />
           </Switch>
-          <Button className={classes.addEvent} variant="contained" color="primary" onClick={handleClickOpen}>
-            Add Event
-          </Button>
-          <AddEvent open={open} handleClose={handleClose} />
             </div>
           </Box>
         </Router>
