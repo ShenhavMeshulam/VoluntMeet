@@ -63,8 +63,6 @@ export const EventPage = () => {
   const createEvent = ({ date, time, ...event }) => {
     const entity = { ...event, date: `${date} ${time}` };
 
-    console.log('create');
-
     return create(entity)
       .then(newEntity => setEvents(x => [...x, newEntity]));
   }
@@ -95,5 +93,5 @@ export const EventPage = () => {
       </Grid>
       <AddEventButton className={classes.addButton} onAdd={createEvent} />
     </div>
-  )
+  );
 };

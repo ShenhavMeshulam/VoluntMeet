@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 
 import { Typography, Button } from '@material-ui/core';
 
@@ -11,15 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Lottie from 'react-lottie';
 import animationData from '../../assests/success.json';
 
-const useStyles = makeStyles(() => ({
-  dialog: {
-    width: '220px'
-  }
-}));
-
 export const SuccessDialog = ({ open, handleClose }) => {
-  const classes = useStyles();
-
   const defaultOptions = {
     loop: true,
     autoplay: true,

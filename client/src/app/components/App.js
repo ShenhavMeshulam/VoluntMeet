@@ -47,4 +47,4 @@ export default () => {
       </Router>
     </MuiThemeProvider>
   );
-}
+};

@@ -66,6 +66,10 @@ const schema = new Schema({
   likes: {
     type: Number,
     default: 0
+  },
+  arriving: {
+    type: Number,
+    default: 0
   }
 });
 

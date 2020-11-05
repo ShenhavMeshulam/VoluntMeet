@@ -67,7 +67,7 @@ export const AddEventDialog = ({ open, handleClose, onAdd }) => {
               <Grid item xs={4}>
                 <KeyboardDatePicker
                   disableToolbar
-                  format="dd/MM/yyyy"
+                  format="MM/dd/yyyy"
                   margin="normal"
                   label="Date"
                   inputVariant="outlined"

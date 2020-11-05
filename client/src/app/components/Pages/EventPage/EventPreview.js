@@ -12,7 +12,8 @@ const useStyles = makeStyles(theme => ({
   },
   headerDetails: {
     marginLeft: theme.spacing(1),
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
+    textTransform: 'capitalize'
   },
   tags: {
     padding: `${theme.spacing(1)}px 0`
@@ -33,24 +34,31 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     flex: 1
+  },
+  title: {
+    textTransform: 'capitalize'
+  },
+  timeAndLocation: {
+    textTransform: 'capitalize'
   }
 }));
 
 export const EventPreview = ({ event = {}, className, handleDialogOpen }) => {
   const classes = useStyles();
+  
   return (
     <Card className={clsx([classes.root, className])} onClick={() => handleDialogOpen(event)}>
       <CardContent className={classes.content}>
         <Box display="flex" flexDirection="row" justifyContent="space-between">
           <Box>
-            <Typography variant="h5">
+            <Typography variant="h5" className={classes.title}>
               {event.title}
             </Typography>
             <Typography variant="body1" className={classes.headerDetails}>
               By {event.creator.name}
             </Typography>
           </Box>
-          <Box display="flex" flexDirection="column" alignItems="flex-end" justifyContent="space-around">
+          <Box className={classes.timeAndLocation} display="flex" flexDirection="column" alignItems="flex-end" justifyContent="space-around">
             {
               event.date &&
               <Box display="flex" flexDirection="row" alignItems="center">

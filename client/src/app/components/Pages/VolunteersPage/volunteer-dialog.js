@@ -22,6 +22,7 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import IconButton from '@material-ui/core/IconButton';
 import { format } from 'date-fns';
 import { SuccessDialog } from '../../SuccessDialog';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
   titleContainer: {
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     margin: 0,
-    textTransform: 'uppercase',
+    textTransform: 'capitalize',
     padding: theme.spacing(2.5),
     flexWrap: 'auto',
   },
@@ -119,10 +120,12 @@ const useStyles = makeStyles((theme) => ({
     '& > *': {
       margin: theme.spacing(0.5),
     },
+  },
+  capitalize: {
+    textTransform: 'capitalize'
   }
 }));
 
-// const EventDialog = ({ isOpen, handleClose, event }) => {
 export default function CustomizedDialogs({ isOpen, handleClose, event }) {
   const classes = useStyles();
 
@@ -150,10 +153,7 @@ export default function CustomizedDialogs({ isOpen, handleClose, event }) {
             <MuiDialogContent className={classes.dialogContent} dividers>
               <div className={classes.eventDetails}>
                 <div className={classes.tagsContainer}>
-                  {event.tags.map(tag => {
-                    return (<Chip size="small" label={tag} avatar={<LocalOfferIcon />} />)
-                  })
-                  }
+                  {event.tags.map(tag => <Chip size="small" label={tag} avatar={<LocalOfferIcon />} />)}
                 </div>
                 <Typography gutterBottom className={classes.fieldContainer}>
                   <DescriptionIcon />
@@ -168,23 +168,12 @@ export default function CustomizedDialogs({ isOpen, handleClose, event }) {
                 <Typography gutterBottom className={classes.fieldContainer}>
                   <LocationOnIcon />
                   <div className={classes.propTitle}>Location: </div>
-                  {event.location}
-                  {/* <Map google={this.props.google} zoom={14}>
-
-                    <Marker onClick={this.onMarkerClick}
-                      name={'Current location'} />
-
-                    <InfoWindow onClose={this.onInfoWindowClose}>
-                      <div>
-                        <h1>{this.state.selectedPlace.name}</h1>
-                      </div>
-                    </InfoWindow>
-                  </Map> */}
+                  <span className={classes.capitalize}>{event.location}</span>
                 </Typography>
                 <Typography gutterBottom className={classes.fieldContainer}>
                   <PersonIcon />
-                  <div className={classes.propTitle}>Minimum People: </div>
-                  {event.minimunPeople}
+                  <div className={classes.propTitle}>Min People: </div>
+                  {event.minPeople}
                 </Typography>
                 <Typography gutterBottom className={classes.fieldContainer}>
                   <GroupIcon />
@@ -193,15 +182,15 @@ export default function CustomizedDialogs({ isOpen, handleClose, event }) {
                 </Typography>
                 <Typography gutterBottom className={classes.fieldContainer}>
                   <EmojiPeopleIcon />
-                  <div className={classes.propTitle}>Arriving Amount:</div>
-                  {event.arrivingAmount}
+                  <div className={classes.propTitle}>Arriving:</div>
+                  {event.arriving}
                 </Typography>
               </div>
               <div className={classes.otherDetailsContainer}>
                 <Typography gutterBottom className={classes.fieldContainer}>
                   <SubjectIcon />
                   <div className={classes.propTitle}>Full Name: </div>
-                  {event.creator.name}
+                  <span className={classes.capitalize}>{event.creator.name}</span>
                 </Typography>
                 <Typography gutterBottom className={classes.fieldContainer}>
                   <PhoneIcon />
@@ -233,8 +222,4 @@ export default function CustomizedDialogs({ isOpen, handleClose, event }) {
       </Dialog>
     </div>
   );
-}
-
-// export default GoogleApiWrapper({
-//     apiKey: ("AIzaSyARL7bYxZ10--R_d708Uxfh40pZxzXp_us")
-//   })(EventDialog)
+};

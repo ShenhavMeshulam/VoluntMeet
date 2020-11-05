@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { AddEventDialog } from './AddEventDialog';
 import { makeStyles } from '@material-ui/core/styles';
+
 const useStyles = makeStyles(() => ({
   button: {
     display: 'flex',
@@ -11,9 +12,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-
-
-export const AddEventButton = ({ className, onAdd }) => {
+export const AddEventButton = ({ onAdd }) => {
   const [isDialogOpen, setDialogOpen] = useState(false);
   const classes = useStyles();
 
@@ -27,5 +26,5 @@ export const AddEventButton = ({ className, onAdd }) => {
       </Button>
       <AddEventDialog open={isDialogOpen} handleClose={() => setDialogOpen(false)} onAdd={handleAdd} />
     </>
-  )
-}
+  );
+};
