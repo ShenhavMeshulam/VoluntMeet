@@ -20,7 +20,7 @@ const eventsSeed = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pellentesque, nisi id consequat lacinia, risus urna facilisis quam, vitae venenatis urna velit et nisl. Morbi id nibh non augue accumsan vulputate at et mi. Etiam hendrerit, purus dignissim placerat iaculis, ligula risus ornare leo, nec vulputate lectus lectus in nisl. Aenean sodales euismod tortor sed posuere. Mauris dignissim tempus odio, a porttitor lacus efficitur ut. Cras eget auctor velit. Nullam lacinia tempus scelerisque. Donec efficitur odio a felis convallis, lacinia pretium erat molestie. Sed convallis eros a lorem eleifend, eget gravida felis porttitor. Morbi efficitur rutrum turpis.',
     location: 'Rishon Letzion',
     date: new Date('16:00 11/10/2020'),
-    tags: ['Engineering', 'Development'],
+    tags: ['Engineering', 'Test'],
     minimunPeople: 10,
     maxPeople: 100,
     arrivingAmount: 50,
@@ -35,14 +35,14 @@ const eventsSeed = [
   {
     title: 'Title',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pellentesque, nisi id consequat lacinia, risus urna facilisis quam, vitae venenatis urna velit et nisl. Morbi id nibh non augue accumsan vulputate at et mi. Etiam hendrerit, purus dignissim placerat iaculis, ligula risus ornare leo, nec vulputate lectus lectus in nisl. Aenean sodales euismod tortor sed posuere. Mauris dignissim tempus odio, a porttitor lacus efficitur ut. Cras eget auctor velit. Nullam lacinia tempus scelerisque. Donec efficitur odio a felis convallis, lacinia pretium erat molestie. Sed convallis eros a lorem eleifend, eget gravida felis porttitor. Morbi efficitur rutrum turpis.',
-    location: 'Rishon Letzion',
+    location: 'lod',
     date: new Date('16:00 11/10/2020'),
-    tags: ['Engineering', 'Development'],
+    tags: ['Test', 'Development'],
     minimunPeople: 10,
     maxPeople: 100,
     arrivingAmount: 50,
     creator: {
-      name: 'Yuval Shlefer',
+      name: 'Shenhav meshulam',
       phoneNumber: '0546976974'
     },
     image: '',
@@ -52,14 +52,14 @@ const eventsSeed = [
   {
     title: 'Title',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pellentesque, nisi id consequat lacinia, risus urna facilisis quam, vitae venenatis urna velit et nisl. Morbi id nibh non augue accumsan vulputate at et mi. Etiam hendrerit, purus dignissim placerat iaculis, ligula risus ornare leo, nec vulputate lectus lectus in nisl. Aenean sodales euismod tortor sed posuere. Mauris dignissim tempus odio, a porttitor lacus efficitur ut. Cras eget auctor velit. Nullam lacinia tempus scelerisque. Donec efficitur odio a felis convallis, lacinia pretium erat molestie. Sed convallis eros a lorem eleifend, eget gravida felis porttitor. Morbi efficitur rutrum turpis.',
-    location: 'Rishon Letzion',
+    location: 'Ashdod',
     date: new Date('16:00 11/10/2020'),
-    tags: ['Engineering', 'Development'],
+    tags: ['Development'],
     minimunPeople: 10,
     maxPeople: 100,
     arrivingAmount: 50,
     creator: {
-      name: 'Yuval Shlefer',
+      name: 'dany till',
       phoneNumber: '0546976974'
     },
     image: '',
@@ -83,7 +83,7 @@ export const EventPage = () => {
 
 
   const handleSearchOnChange = (data) => {
-    setEvents(eventsSeed.filter(x => x.title.includes(data) || x.description.includes(data) || x.location.includes(data)))//|| x.creator.Name.includes(data) || x.tags.filter(x => x.includes(data)) ))
+    setEvents(eventsSeed.filter(x => x.title.includes(data) || x.description.includes(data) || x.location.includes(data) || x.tags.find(x => x.includes(data)) || x.creator.name.includes(data)))//| )
   }
 
   return (
