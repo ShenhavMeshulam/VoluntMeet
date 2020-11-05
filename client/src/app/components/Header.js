@@ -23,7 +23,7 @@ export default () => {
         <Typography variant="h4">
           VoluntMeet
           </Typography>
-        <AccessibilityNewIcon/>
+        <AccessibilityNewIcon fontSize="large"/>
       </Toolbar>
     </AppBar>
   );

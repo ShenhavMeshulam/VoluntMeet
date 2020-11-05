@@ -116,7 +116,6 @@ export const AddEventDialog = ({ open, handleClose, onAdd }) => {
           <Grid item className={classes.inputWidth}>
             <TagsInput name="tags" label="tags" fullWidth control={control} />
           </Grid>
-          {/* onChange={(chips) => handleChange(chips)} */}
           <Grid item>
             <Typography variant="h5" component="h4">
               Contact Information

@@ -33,16 +33,16 @@ export const SuccessDialog = ({ open, handleClose }) => {
           Waiting For You!
         </Typography>
       </DialogTitle>
-      <DialogContent className={classes.dialog}>
-        <Lottie          
+      <DialogContent>
+        <Lottie
           options={defaultOptions}
           height={160}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="default">
-          Cancel
-          </Button>
+          Yay!
+        </Button>
       </DialogActions>
     </Dialog>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import Chip from '@material-ui/core/Chip';
@@ -20,7 +20,8 @@ import SubjectIcon from '@material-ui/icons/Subject';
 import CloseIcon from '@material-ui/icons/Close';
 import PhoneIcon from '@material-ui/icons/Phone';
 import IconButton from '@material-ui/core/IconButton';
-import {format} from 'date-fns';
+import { format } from 'date-fns';
+import { SuccessDialog } from '../../SuccessDialog';
 
 const useStyles = makeStyles((theme) => ({
   titleContainer: {
@@ -94,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
   },
   socialStatContainer: {
     display: 'flex',
-    flexFlow: 'row'
+    padding: '5px'
   },
   eventDetails: {
     width: '65%'
@@ -111,10 +112,6 @@ const useStyles = makeStyles((theme) => ({
     height: '40%',
     padding: '10px'
   },
-  socialDetails: {
-    fontWeight: '1000',
-    fontSize: '20px'
-  },
   tagsContainer: {
     display: 'flex',
     flexFlow: 'row',
@@ -128,6 +125,14 @@ const useStyles = makeStyles((theme) => ({
 // const EventDialog = ({ isOpen, handleClose, event }) => {
 export default function CustomizedDialogs({ isOpen, handleClose, event }) {
   const classes = useStyles();
+
+  const [isSuccessDialogOpen, setSuccessDialogOpen] = useState(false);
+  const handleSuccessClickOpen = () => {
+    setSuccessDialogOpen(true);
+  };
+  const handleSuccessClose = () => {
+    setSuccessDialogOpen(false);
+  };
 
   return (
     <div>
@@ -203,24 +208,24 @@ export default function CustomizedDialogs({ isOpen, handleClose, event }) {
                   <div className={classes.propTitle}>Phone Number: </div>
                   {event.creator.phoneNumber}
                 </Typography>
-                <img src={event.image} alt="Event Image" className={classes.image}></img>
               </div>
             </MuiDialogContent>
             <MuiDialogActions className={classes.dialogActions}>
               <div className={classes.socialContainer}>
                 <div className={classes.socialStatContainer}>
-                  <div className={classes.socialDetails}>{event.likes}</div>
+                  <Typography variant="body1">{event.likes}</Typography>
                   <FavoriteIcon color={'error'} />
                 </div>
                 <div className={classes.socialStatContainer}>
-                  <div className={classes.socialDetails}>{event.comments.length}</div>
+                  <Typography variant="body1">{event.comments.length}</Typography>
                   <CommentIcon />
                 </div>
               </div>
               <div className={classes.optionsContainer}>
-                <Button autoFocus className={classes.signUpButton} variant="contained" color="primary">
+                <Button autoFocus className={classes.signUpButton} color="secondary" onClick={handleSuccessClickOpen}>
                   Sign Me Up!
-                </Button>
+                 </Button>
+                <SuccessDialog open={isSuccessDialogOpen} handleClose={handleSuccessClose} />
               </div>
             </MuiDialogActions>
           </>
