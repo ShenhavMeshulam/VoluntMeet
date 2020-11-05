@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
 export const EventPage = () => {
   const classes = useStyles();
   const [selectedEvent, setSelectedEvent] = useState();
+  const [searchText, setSearchText] = useState('');
   const [events, setEvents] = useState([]);
   const { create, getAll } = useEvent();
 
@@ -54,11 +55,10 @@ export const EventPage = () => {
     setSelectedEvent();
   }
 
-  const handleSearchOnChange = (data) => {
-    setEvents(eventsSeed.filter(x => x.title.toLocaleLowerCase().includes(data) ||
-      x.description.includes(data) || x.location.includes(data) ||
-      x.tags.find(x => x.includes(data)) || x.creator.name.includes(data)))//| )
-  }
+  const applySearch = (data) =>
+    data.filter(x => x.title.toLocaleLowerCase().includes(searchText) ||
+      x.description.toLocaleLowerCase().includes(searchText) || x.location.toLocaleLowerCase().includes(searchText) ||
+      x.tags.find(x => x.toLocaleLowerCase().includes(searchText)) || x.creator.name.toLocaleLowerCase().includes(searchText))
 
   const createEvent = ({ date, time, ...event }) => {
     const entity = { ...event, date: `${date} ${time}` };
@@ -80,13 +80,13 @@ export const EventPage = () => {
         <div className={classes.searchInput}>
           <ReactSearchBox
             placeholder="Search"
-            onChange={handleSearchOnChange}
+            onChange={value => setSearchText(value.toLocaleLowerCase())}
             inputBoxBorderColor={'black'}
           />
         </div>
       </div>
       <Grid container spacing={2} className={classes.eventList}>
-        {events.map((event, index) => (
+        {applySearch(events).map((event, index) => (
           <Grid item xs={12} md={6} lg={4}>
             <EventPreview key={index} className={classes.eventPreview} event={event} handleDialogOpen={() => handleOpenDialog(event)} />
           </Grid>
