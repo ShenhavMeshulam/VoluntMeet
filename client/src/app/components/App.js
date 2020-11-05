@@ -53,7 +53,7 @@ export default () => {
           </Switch>
           <Button className={classes.addEvent} variant="contained" color="primary" onClick={handleClickOpen}>
             Add Event
-            </Button>
+          </Button>
           <AddEvent open={open} handleClose={handleClose} />
         </div>
       </Box>

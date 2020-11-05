@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
-import {formatDistance} from 'date-fns';
-import {Box, Button, Card, CardActions, CardContent, Typography, makeStyles, Chip, Grid} from '@material-ui/core';
+import { formatDistance } from 'date-fns';
+import { Box, Button, Card, CardActions, CardContent, Typography, makeStyles, Chip, Grid } from '@material-ui/core';
 import LocationOnIcon from '@material-ui/icons/LocationOnOutlined';
 import WatchLaterIcon from '@material-ui/icons/WatchLaterOutlined';
 
@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const EventPreview = ({event = {}, className, handleDialogOpen}) => {
+export const EventPreview = ({ event = {}, className, handleDialogOpen }) => {
   const classes = useStyles();
   return (
     <Card className={clsx([classes.root, className])}>
@@ -50,7 +50,7 @@ export const EventPreview = ({event = {}, className, handleDialogOpen}) => {
               event.date &&
               <Box display="flex" flexDirection="row" alignItems="center">
                 <Typography>
-                  {formatDistance(event.date, new Date(), {addSuffix: true})}
+                  {formatDistance(event.date, new Date(), { addSuffix: true })}
                 </Typography>
                 <WatchLaterIcon className={classes.icon} />
               </Box>
