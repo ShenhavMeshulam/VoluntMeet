@@ -62,6 +62,10 @@ const schema = new Schema({
   comments: {
     type: [commentSchema],
     required: false
+  },
+  likes: {
+    type: Number,
+    default: 0
   }
 });
 
